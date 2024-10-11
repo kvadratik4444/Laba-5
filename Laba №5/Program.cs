@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,13 +14,19 @@ namespace Laba__5
     {
         class FitnessProgram
         {
+            private string name;
             public string Name
             {
-                set { if (String.IsNullOrEmpty(value)) Name = value; }
-                get { return Name; }
+                set 
+                { 
+                    if (name != null) { }
+                    else name = value;
+                }
+                get { return name; }
             }
-            public string ExercisePlan { get; set; }
+            private string ExercisePlan;
             private int CaloriesBurned;
+             
             private int TotalExcesises;
             private int DailyTargetCalories;
             public string FitnessLevel;
@@ -41,6 +47,14 @@ namespace Laba__5
                 else Warning = false;
                 TotalExcesises++;
             }
+            public string GetFitnessLevel()
+            {
+                return FitnessLevel;
+            }
+            public void SetExercisePlan(string exercisePlan)
+            {
+                ExercisePlan = exercisePlan;
+            }
             public void ChangeExerisePlan(string NewPlan)
             {
                 ExercisePlan += NewPlan;
@@ -60,7 +74,6 @@ namespace Laba__5
         }
         static void Main(string[] args)
         {
-            bool create = false;
             FitnessProgram fitness_program = new FitnessProgram();
             while (true)
             {
@@ -69,12 +82,6 @@ namespace Laba__5
                 switch (x)
                 {
                     case 1:
-                        if (create)
-                        {
-                            Console.WriteLine("Имя изменить нельзя");
-                            break;
-                        }
-                        create = true;
                         Console.WriteLine("Введите имя");
                         string name = Console.ReadLine();
                         fitness_program.Name = name;
@@ -90,11 +97,9 @@ namespace Laba__5
                     case 3:
                         Console.WriteLine("Введите план тренировок");
                         ExercisePlan = Console.ReadLine();
-                        fitness_program.ExercisePlan = ExercisePlan;
+                        fitness_program.SetExercisePlan(ExercisePlan);
                         break;
                     case 4:
-                        //Console.Write("Выберете:\n1. Добавить информацию в план\n2. Удалить информацию о тренировках");
-                        //int y = Convert.ToInt32(Console.ReadLine());
                         Console.WriteLine("Введите план");
                         string str = Console.ReadLine();
                         fitness_program.ChangeExerisePlan(str);
